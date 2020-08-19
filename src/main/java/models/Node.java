@@ -1,9 +1,6 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  *
@@ -61,6 +58,9 @@ public class Node {
                     this.children.add(child2);
                     child2.setAddToLeafNode(false);
 
+                }else{
+                    child1.setParent(this);
+                    this.children.add(child1);
                 }
             }
         }else if (child.data>=100){
@@ -91,6 +91,9 @@ public class Node {
                     this.children.add(child2);
                     child2.setAddToLeafNode(false);
 
+                }else{
+                    child1.setParent(this);
+                    this.children.add(child1);
                 }
             }
 
@@ -147,10 +150,13 @@ public class Node {
 
 
 
-    public static void printAllRootToLeafPaths(Node node, List<Integer> path, Boolean withoutRoot, Boolean forInternational)
+    public static void printAllRootToLeafPaths(Node node, ArrayList<Integer> path, Boolean withoutRoot, Boolean forInternational)
     {
+
+
         if(node==null)
         {
+
             return;
         }
         path.add(node.getData());
@@ -158,35 +164,61 @@ public class Node {
 
 
         if(node.getChildren().isEmpty())
+
         {
+            System.out.print("Interpretationn :");
+
             if (forInternational) {
+
                 System.out.print("0030");
             }
+
             if (withoutRoot){
                 for(int i=1; i<=path.size()-1; i++){
                     System.out.print(path.get(i));
+
                 }
-                System.out.println();
+
+
             }else {
                 for (Integer digit : path
                 ) {
                     System.out.print(digit);
                 }
-                System.out.println();
-            }
 
-            return;
+
+            }
+            int lengthOfInterpetation=0;
+            for (Integer digit:path
+                 ) {
+                lengthOfInterpetation += String.valueOf(digit).length();
+
+            }
+            if (lengthOfInterpetation==10){
+            System.out.print(" Valid");
+        }else{
+                System.out.print(" Invalid");
+            }
+            System.out.println();
+
+
         }
         else
         {
-            for (Node parent:node.getChildren()
+
+            for (Node child:node.getChildren()
                  ) {
 
-                printAllRootToLeafPaths(parent,new ArrayList(path),withoutRoot,forInternational);
+                printAllRootToLeafPaths(child,new ArrayList(path),withoutRoot,forInternational);
             }
 
 
         }
+
+
+
+
     }
+
 
 }
