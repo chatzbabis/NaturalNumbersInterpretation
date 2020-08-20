@@ -4,23 +4,23 @@ import java.util.ArrayList;
 
 public class Validations {
 
-    //return true if all validations is true
-    public static boolean isAllValidations(String phoneNumber,ArrayList<String> phoneNumberInList){
-        if (!isOnlyNumbersAndSpaces(phoneNumber)){
+    //return true if all validations are true
+    public static boolean isValid(String phoneNumber, ArrayList<String> phoneNumberInList){
+        if (!hasOnlyNumbersAndSpaces(phoneNumber)){
             return false;
         }
-        else if (!isCorrectLength(phoneNumber)){
+        else if (!hasCorrectLength(phoneNumber)){
             return false;
-        }else if(!isCorrectFirstsDigits(phoneNumber)){
+        }else if(!hasCorrectFirstsDigits(phoneNumber)){
             return false;
-        }else if(!isCorrectNumbersLengthInSequence(phoneNumberInList)){
+        }else if(!hasCorrectNumbersLengthInSequence(phoneNumberInList)){
             return false;
         }
         return true;
     }
 
-    //check if phoneNumber have 10 or 14 digits without spaces
-    public static boolean isCorrectLength(String phone){
+    //check if phoneNumber has 10 or 14 digits without spaces
+    public static boolean hasCorrectLength(String phone){
         if (phone.length()==10 || phone.length()==14){
             return true;
         }
@@ -28,21 +28,21 @@ public class Validations {
         return false;
     }
 
-    //return true if phone begin with correct digits
-    public static boolean isCorrectFirstsDigits(String phone){
+    //return true if phone begins with correct digits
+    public static boolean hasCorrectFirstsDigits(String phone){
         if (phone.substring(0,1).equals("2") || phone.substring(0,2).equals("69")){
             return true;
         }
         if (phone.substring(0,4).equals("0030") &&(phone.substring(4,5).equals("2") || phone.substring(4,6).equals("69"))){
             return true;
         }
-        System.out.println("The number must start with '2' or '69' for demistic calls and with '00302'or '003069' for international calls");
+        System.out.println("The number must start with '2' or '69' for domestic calls and with '00302'or '003069' for international calls");
         return false;
     }
 
     //check each number in
     //the input sequence if it is up to three digit numbers
-    public static boolean isCorrectNumbersLengthInSequence(ArrayList<String> phoneNumber){
+    public static boolean hasCorrectNumbersLengthInSequence(ArrayList<String> phoneNumber){
         boolean flag=true;
 
         for (String number: phoneNumber) {
@@ -57,8 +57,8 @@ public class Validations {
         return flag;
     }
 
-    //return true if phoneNumber have only numbers and spaces
-    public static boolean isOnlyNumbersAndSpaces(String phoneNumber){
+    //return true if phoneNumber has only numbers and spaces
+    public static boolean hasOnlyNumbersAndSpaces(String phoneNumber){
 
         if (phoneNumber.matches("[0-9 ]+")){
 

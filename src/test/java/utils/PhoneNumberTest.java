@@ -5,10 +5,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static utils.InsertNumber.phoneNumbersWithoutSpaces;
-import static utils.InsertNumber.sequenseWithoutSpaces;
+import static utils.PhoneNumber.phoneNumbersWithoutSpaces;
+import static utils.PhoneNumber.sequenceWithoutSpaces;
 
-public class InsertNumberTest {
+public class PhoneNumberTest {
 
 
 
@@ -29,7 +29,7 @@ public class InsertNumberTest {
             phoneNumber2.add("22");
             phoneNumber2.add("3");
             phoneNumber2.add("544");
-            Assert.assertEquals(phoneNumber2, sequenseWithoutSpaces("0 22 3    544"));
+            Assert.assertEquals(phoneNumber2, sequenceWithoutSpaces("0 22 3    544"));
         }
 
 

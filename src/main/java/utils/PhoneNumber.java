@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-import static utils.Interpretations.firstDigitCases;
-import static utils.Validations.isAllValidations;
+import static utils.Interpretations.beginInterpretation;
+import static utils.Validations.isValid;
 
 
-public class InsertNumber {
+public class PhoneNumber {
 
-    public static String insertPhone() {
+    public static String getPhoneInput() {
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
 
         String phone;
@@ -19,9 +19,9 @@ public class InsertNumber {
         do {
             System.out.println("Enter the phone Number: ");
             phone = sc.nextLine();  // Read user input
-            phoneNumbersInList = sequenseWithoutSpaces(phone);
+            phoneNumbersInList = sequenceWithoutSpaces(phone);
             phoneNumbersWithoutSpaces= phone.replaceAll("\\s+","");
-        }while (!isAllValidations(phoneNumbersWithoutSpaces,phoneNumbersInList));
+        }while (!isValid(phoneNumbersWithoutSpaces,phoneNumbersInList));
         return phone;
     }
 
@@ -31,42 +31,39 @@ public class InsertNumber {
         if (phone.substring(0,1).equals("0") || phone.substring(0,2).equals("00")|| phone.substring(0,3).equals("003")) {
 
             int indexOfThirdZero=3;
-            int index=2;
             for (int i=0; i<3; i++) indexOfThirdZero = phone.indexOf('0', indexOfThirdZero);
-            String left = phone.substring(0, indexOfThirdZero);
-            String right;
+            String rightPartAfterThirdZero;
             System.out.println(phone.substring(indexOfThirdZero+1,indexOfThirdZero+2));
             if (phone.substring(indexOfThirdZero+1,indexOfThirdZero+2).equals(" ")) {
-                 right = phone.substring(indexOfThirdZero + 2);
+                 rightPartAfterThirdZero = phone.substring(indexOfThirdZero + 2);
             }else{
-                right = phone.substring(indexOfThirdZero + 1);
+                rightPartAfterThirdZero = phone.substring(indexOfThirdZero + 1);
             }
 
-            ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(right);
-            firstDigitCases(phoneNumbersInList,true);
+            ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(rightPartAfterThirdZero);
+            beginInterpretation(phoneNumbersInList,true);
 
         }
         else{
             ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(phone);
-            firstDigitCases(phoneNumbersInList,false);
+            beginInterpretation(phoneNumbersInList,false);
         }
     }
 
 
     //Create an arrayList of Integers with the numbers of phoneNumber
     public static ArrayList<Integer> phoneNumbersWithoutSpaces(String phoneNumbers){
-        ArrayList<Integer> phone=new ArrayList<Integer>();
+        ArrayList<Integer> phoneNumbersInList = new ArrayList<>();
         String[] arrayOfNumberDigitGroups = phoneNumbers.split("\\s+");
 
-        for (String digit:arrayOfNumberDigitGroups
-             ) {
-            phone.add(Integer.parseInt(digit));
+        for (String digit:arrayOfNumberDigitGroups) {
+            phoneNumbersInList.add(Integer.parseInt(digit));
         }
-        return phone;
+        return phoneNumbersInList;
     }
 
     //Create an arrayList of Strings with the numbers of phoneNumber
-    public static ArrayList<String> sequenseWithoutSpaces(String phoneNumbers){
+    public static ArrayList<String> sequenceWithoutSpaces(String phoneNumbers){
         ArrayList<String> phone=new ArrayList<String>();
         String[] arrayOfNumberDigitGroups = phoneNumbers.split("\\s+");
 

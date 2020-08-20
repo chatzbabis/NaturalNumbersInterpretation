@@ -20,13 +20,12 @@ public class Node {
     }
 
     //if addToLeafNodeList is false then this Node will not have children
-    private boolean addToLeafNodeList=true;
+    private boolean canBeAddedToLeafNodeList =true;
 
     //add a child without the process of interpretation
-    public Node addSingleChild(Node child){
+    public void addSingleChild(Node child){
         child.setParent(this);
         this.children.add(child);
-        return child;
     }
     /*
      *add a children to the tree
@@ -34,81 +33,72 @@ public class Node {
      *added two children, a node with the same value and
      *a node with the same value plus the value of next Node
      */
-    public Node addChild(Node child, Integer nextNumber) {
-        if (child.data<=9){
-        child.setParent(this);
-        this.children.add(child);
-        }else if (child.data>=10 && child.data<100){
+    public void addChild(Node child, int nextNumber) {
+        if (child.getData()<=9){
+            child.setParent(this);
+            this.children.add(child);
+        }else if (child.getData()<100) {
 
-            Node child1=child;
+            if (child.getData()%10!=0) {
+                Node child2=new Node(child.getData()-(child.getData()%10));
 
-            if (child.getData()%10!=0){
-            Node child2=new Node(child.data-(child.data%10));
+                child.setParent(this);
+                this.children.add(child);
 
-            child1.setParent(this);
-            this.children.add(child1);
+                child2.setParent(this);
+                this.children.add(child2);
 
-            child2.setParent(this);
-            this.children.add(child2);
-
-            child2.addChild(new Node(child.data%10),0);
-            }else{
+                child2.addChild(new Node(child.getData()%10),0);
+            }else {
 
                 if (nextNumber<10 ){
 
-                    child1.setParent(this);
-                    this.children.add(child1);
+                    child.setParent(this);
+                    this.children.add(child);
 
-                    Node child2=new Node(child.data+nextNumber);
+                    Node child2=new Node(child.getData()+nextNumber);
 
                     child2.setParent(this);
                     this.children.add(child2);
-                    child2.setAddToLeafNodeList(false);
+                    child2.setCanBeAddedToLeafNodeList(false);
 
-                }else{
-                    child1.setParent(this);
-                    this.children.add(child1);
+                }else {
+                    child.setParent(this);
+                    this.children.add(child);
                 }
             }
-        }else if (child.data>=100){
+        }else {
 
-            Node child1=child;
+            if (child.getData()%100 != 0) {
+                child.setParent(this);
+                this.children.add(child);
 
-            if (child.getData()%100!=0) {
-                child1.setParent(this);
-                this.children.add(child1);
-
-                Node child2 = (new Node(child.data - (child.data % 100)));
+                Node child2 = (new Node(child.getData() - (child.getData() % 100)));
                 child2.setParent(this);
                 this.children.add(child2);
-                child2.addChild(new Node(child.data % 100), 0);
+                child2.addChild(new Node(child.getData() % 100), 0);
 
-                Node child3 = (new Node(child.data - (child.data % 10)));
+                Node child3 = (new Node(child.getData() - (child.getData() % 10)));
                 child3.setParent(this);
                 this.children.add(child3);
-                child3.addChild(new Node(child.data % 10), 0);
-            }else{
-                if (nextNumber<10 && nextNumber!=0){
+                child3.addChild(new Node(child.getData() % 10), 0);
+            }else {
+                if (nextNumber<10 && nextNumber!=0) {
 
-                    child1.setParent(this);
-                    this.children.add(child1);
+                    child.setParent(this);
+                    this.children.add(child);
 
-                    Node child2=new Node(child.data+nextNumber);
+                    Node child2=new Node(child.getData()+nextNumber);
                     child2.setParent(this);
                     this.children.add(child2);
-                    child2.setAddToLeafNodeList(false);
+                    child2.setCanBeAddedToLeafNodeList(false);
 
-                }else{
-                    child1.setParent(this);
-                    this.children.add(child1);
+                }else {
+                    child.setParent(this);
+                    this.children.add(child);
                 }
             }
         }
-        return child;
-    }
-
-    public List<Node> getChildren() {
-        return children;
     }
 
     public Integer getData() {
@@ -123,16 +113,16 @@ public class Node {
         return parent;
     }
 
-    public boolean isAddToLeafNodeList() {
-        return addToLeafNodeList;
+    public boolean isCanBeAddedToLeafNodeList() {
+        return canBeAddedToLeafNodeList;
     }
 
-    public void setAddToLeafNodeList(boolean addToLeafNode) {
-        this.addToLeafNodeList = addToLeafNode;
+    public void setCanBeAddedToLeafNodeList(boolean addToLeafNode) {
+        this.canBeAddedToLeafNodeList = addToLeafNode;
     }
 
     public Set<Node> getAllLeafNodes() {
-        Set<Node> leafNodes = new HashSet<Node>();
+        Set<Node> leafNodes = new HashSet<>();
         if (this.children.isEmpty()) {
             leafNodes.add(this);
         } else {
