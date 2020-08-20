@@ -10,38 +10,35 @@ import static utils.PrintTree.printInterpretations;
 public class Interpretations {
 
     /*check the value of the first number of phoneNumber and then calculate each case and then
-     call allInteprentation for the calculation and after that print the tree.
+     call allInterpretation for the calculation and after that print the tree.
      if InternationalCalls is true then call printTree to print the phoneNumber with "0030" in the beginning */
     public static void firstDigitCases(List<Integer> phone,boolean isInternationalCalls){
             Node root = new Node(phone.get(0));
         if (phone.get(0)==2 || (phone.get(0)>=20 && phone.get(0)<=29)) {
             root.addSingleChild(new Node(phone.get(1)));
-            allInterpretations(phone,root,2);
-            //printTree(root,false,isInternationalCalls);
-            System.out.println("------------------------");
+            addChildrenToLeafNodes(phone,root,2);
+
             printInterpretations(root,isInternationalCalls);
         }else if(phone.get(0)>=200 && phone.get(0)<=299){
-            allInterpretations(phone,root,1);
-           // printTree(root,false,isInternationalCalls);
-            System.out.println("------------------------");
+            addChildrenToLeafNodes(phone,root,1);
+
             printInterpretations(root,isInternationalCalls);
         }
         if ((phone.get(0)==69 || phone.get(0)==6) && phone.get(1)!=9){
-            allInterpretations(phone,root,1);
-            //printTree(root,false,isInternationalCalls);
-            System.out.println("------------------------");
-            printInterpretations(root,isInternationalCalls);
-        }else if(phone.get(0)==6 && phone.get(1)==9){
-            root.addSingleChild(new Node(phone.get(1)));
-            allInterpretations(phone,root,2);
-            //printTree(root,false,isInternationalCalls);
-            System.out.println("------------------------");
-            printInterpretations(root,isInternationalCalls);
-        }else if(phone.get(0)>=690 && phone.get(0)<=699){
+            addChildrenToLeafNodes(phone,root,1);
 
-            allInterpretations(phone,root,0);
-           // printTree(root,true,isInternationalCalls);
-            System.out.println("------------------------");
+            printInterpretations(root,isInternationalCalls);
+        }
+        else if(phone.get(0)==6 && phone.get(1)==9){
+            root.addSingleChild(new Node(phone.get(1)));
+            addChildrenToLeafNodes(phone,root,2);
+
+            printInterpretations(root,isInternationalCalls);
+        }
+        else if(phone.get(0)>=690 && phone.get(0)<=699){
+
+            addChildrenToLeafNodes(phone,root,0);
+
             printInterpretations(root,isInternationalCalls);
         }
     }
@@ -49,7 +46,7 @@ public class Interpretations {
 
     //add children to the leaf of the tree
     //run the phone list from indexValue depending on each case of first digits
-    public static void allInterpretations(List<Integer> phone, Node root, int IndexValue){
+    public static void addChildrenToLeafNodes(List<Integer> phone, Node root, int IndexValue){
         for (int i = IndexValue; i < phone.size(); i++) {
 
             Set<Node> allLeafNodes=root.getAllLeafNodes();
@@ -71,10 +68,4 @@ public class Interpretations {
             }
         }
     }
-
-//    public static void printTree(Node root, Boolean printWithoutRoot, boolean forEkswteriko){
-//        ArrayList<Integer> paths= new ArrayList<Integer>();
-//        Node.printAllRootToLeafPaths(root,paths,printWithoutRoot,forEkswteriko);
-//        System.out.println(paths);
-//    }
 }
