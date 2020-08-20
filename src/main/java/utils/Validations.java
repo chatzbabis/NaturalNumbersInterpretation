@@ -5,22 +5,22 @@ import java.util.ArrayList;
 public class Validations {
 
     //return true if all validations is true
-    public static boolean isAllValidationsTrue(String phoneNumber,ArrayList<String> phoneNumberInList){
+    public static boolean isAllValidations(String phoneNumber,ArrayList<String> phoneNumberInList){
         if (!isOnlyNumbersAndSpaces(phoneNumber)){
             return false;
         }
-        else if (!rightLength(phoneNumber)){
+        else if (!isCorrectLength(phoneNumber)){
             return false;
-        }else if(!isRightFirstsDigits(phoneNumber)){
+        }else if(!isCorrectFirstsDigits(phoneNumber)){
             return false;
-        }else if(!isRightNumbersLengthInSequence(phoneNumberInList)){
+        }else if(!isCorrectNumbersLengthInSequence(phoneNumberInList)){
             return false;
         }
         return true;
     }
 
     //check if phoneNumber have 10 or 14 digits without spaces
-    public static boolean rightLength(String phone){
+    public static boolean isCorrectLength(String phone){
         if (phone.length()==10 || phone.length()==14){
             return true;
         }
@@ -29,7 +29,7 @@ public class Validations {
     }
 
     //return true if phone begin with correct digits
-    public static boolean isRightFirstsDigits(String phone){
+    public static boolean isCorrectFirstsDigits(String phone){
         if (phone.substring(0,1).equals("2") || phone.substring(0,2).equals("69")){
             return true;
         }
@@ -42,7 +42,7 @@ public class Validations {
 
     //check each number in
     //the input sequence if it is up to three digit numbers
-    public static boolean isRightNumbersLengthInSequence(ArrayList<String> phoneNumber){
+    public static boolean isCorrectNumbersLengthInSequence(ArrayList<String> phoneNumber){
         boolean flag=true;
 
         for (String number: phoneNumber) {

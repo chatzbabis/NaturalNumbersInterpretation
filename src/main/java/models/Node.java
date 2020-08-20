@@ -103,14 +103,9 @@ public class Node {
                     this.children.add(child1);
                 }
             }
-
-
-
         }
         return child;
     }
-
-
 
     public List<Node> getChildren() {
         return children;
@@ -119,8 +114,6 @@ public class Node {
     public Integer getData() {
         return data;
     }
-
-
 
     private void setParent(Node parent) {
         this.parent = parent;

@@ -5,18 +5,13 @@ import java.util.Scanner;
 
 
 import static utils.Interpretations.firstDigitCases;
-import static utils.Validations.isAllValidationsTrue;
+import static utils.Validations.isAllValidations;
 
 
 public class InsertNumber {
 
-    //private String phoneNumbers;
-
-    //private ArrayList<Integer> phone;
-
     public static String insertPhone() {
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
-
 
         String phone;
         String phoneNumbersWithoutSpaces;
@@ -26,14 +21,12 @@ public class InsertNumber {
             phone = sc.nextLine();  // Read user input
             phoneNumbersInList = sequenseWithoutSpaces(phone);
             phoneNumbersWithoutSpaces= phone.replaceAll("\\s+","");
-        }while (!isAllValidationsTrue(phoneNumbersWithoutSpaces,phoneNumbersInList));
+        }while (!isAllValidations(phoneNumbersWithoutSpaces,phoneNumbersInList));
         return phone;
     }
 
         // if phoneNumber begins with "0030" take the other digits and begin the calculation of interpretation
         public static void internationalOrDomestic(String phone){
-
-
 
         if (phone.substring(0,1).equals("0") || phone.substring(0,2).equals("00")|| phone.substring(0,3).equals("003")) {
 
@@ -49,14 +42,11 @@ public class InsertNumber {
                 right = phone.substring(indexOfThirdZero + 1);
             }
 
-
             ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(right);
             firstDigitCases(phoneNumbersInList,true);
 
-
         }
         else{
-
             ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(phone);
             firstDigitCases(phoneNumbersInList,false);
         }

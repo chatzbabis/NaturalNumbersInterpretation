@@ -9,9 +9,5 @@ public class Main {
 
         internationalOrDomestic(phone);
 
-
     }
-
-
-
 }

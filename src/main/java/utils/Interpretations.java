@@ -44,9 +44,6 @@ public class Interpretations {
             System.out.println("------------------------");
             printInterpretations(root,isInternationalCalls);
         }
-
-
-
     }
 
 
@@ -60,7 +57,6 @@ public class Interpretations {
                 if (i==phone.size()-1){
                     if(!leafNode.isAddToLeafNodeList()){continue;}
                     leafNode.addChild(new Node(phone.get(i)),0);
-
                 }
                 else {
                     //if leafNode.isAddToLeafNodeList()==false then does not add the next node as a child to this.node
@@ -71,17 +67,9 @@ public class Interpretations {
                         continue;
                     }
                     leafNode.addChild(new Node(phone.get(i)), phone.get(i + 1));
-
-
                 }
-
-
             }
-
-
         }
-
-
     }
 
 //    public static void printTree(Node root, Boolean printWithoutRoot, boolean forEkswteriko){

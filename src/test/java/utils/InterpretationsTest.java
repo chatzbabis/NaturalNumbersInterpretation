@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.Interpretations.interpretations;
+import static utils.Interpretations.*;
 
 public class InterpretationsTest {
 

@@ -35,6 +35,8 @@ public class PrintTree {
             System.out.print("Interpretation "+n+": ");
             if (isInternationalCall){
                 System.out.print("0030"+path);
+            }else{
+                System.out.print(path);
             }
             if (path.length()==10){
                 System.out.println(" Valid");
