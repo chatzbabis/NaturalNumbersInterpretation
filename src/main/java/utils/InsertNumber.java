@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-import static utils.Interpretations.interpretations;
-import static utils.Validations.allValidations;
+import static utils.Interpretations.firstDigitCases;
+import static utils.Validations.isAllValidationsTrue;
 
 
 public class InsertNumber {
@@ -26,11 +26,11 @@ public class InsertNumber {
             phone = sc.nextLine();  // Read user input
             phoneNumbersInList = sequenseWithoutSpaces(phone);
             phoneNumbersWithoutSpaces= phone.replaceAll("\\s+","");
-        }while (!allValidations(phoneNumbersWithoutSpaces,phoneNumbersInList));
+        }while (!isAllValidationsTrue(phoneNumbersWithoutSpaces,phoneNumbersInList));
         return phone;
     }
 
-
+        // if phoneNumber begins with "0030" take the other digits and begin the calculation of interpretation
         public static void internationalOrDomestic(String phone){
 
 
@@ -51,19 +51,19 @@ public class InsertNumber {
 
 
             ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(right);
-            interpretations(phoneNumbersInList,true);
+            firstDigitCases(phoneNumbersInList,true);
 
 
         }
         else{
 
             ArrayList <Integer> phoneNumbersInList=phoneNumbersWithoutSpaces(phone);
-            interpretations(phoneNumbersInList,false);
+            firstDigitCases(phoneNumbersInList,false);
         }
     }
 
 
-
+    //Create an arrayList of Integers with the numbers of phoneNumber
     public static ArrayList<Integer> phoneNumbersWithoutSpaces(String phoneNumbers){
         ArrayList<Integer> phone=new ArrayList<Integer>();
         String[] arrayOfNumberDigitGroups = phoneNumbers.split("\\s+");
@@ -75,6 +75,7 @@ public class InsertNumber {
         return phone;
     }
 
+    //Create an arrayList of Strings with the numbers of phoneNumber
     public static ArrayList<String> sequenseWithoutSpaces(String phoneNumbers){
         ArrayList<String> phone=new ArrayList<String>();
         String[] arrayOfNumberDigitGroups = phoneNumbers.split("\\s+");

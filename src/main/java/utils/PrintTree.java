@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrintTree {
+
+    //find all the paths of tree and put them to a List
     private static List<String> findPathsInTheTree(Node root) {
         List<String> interpretations=new ArrayList<>();
         List<Node> finalLeaves=new ArrayList<>();
@@ -23,7 +25,8 @@ public class PrintTree {
         return interpretations;
     }
 
-
+    //print all intepretations
+    //if isInternationalCall is true put "0030" at the beginning of each path
     public static void printInterpretations(Node root,boolean isInternationalCall){
         List<String> pathsOfTree=findPathsInTheTree(root);
         int n=1;

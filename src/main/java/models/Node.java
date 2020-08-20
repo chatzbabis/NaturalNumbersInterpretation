@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Node {
 
-    private Integer data = null;
+    private Integer data;
 
     private List<Node> children = new ArrayList<>();
 
@@ -19,14 +19,21 @@ public class Node {
         this.data = data;
     }
 
-    private boolean addToLeafNode=true;
+    //if addToLeafNodeList is false then this Node will not have children
+    private boolean addToLeafNodeList=true;
 
+    //add a child without the process of interpretation
     public Node addSingleChild(Node child){
         child.setParent(this);
         this.children.add(child);
         return child;
     }
-
+    /*
+     *add a children to the tree
+     *if the value of child is multiple of 10 or 100,
+     *added two children, a node with the same value and
+     *a node with the same value plus the value of next Node
+     */
     public Node addChild(Node child, Integer nextNumber) {
         if (child.data<=9){
         child.setParent(this);
@@ -56,7 +63,7 @@ public class Node {
 
                     child2.setParent(this);
                     this.children.add(child2);
-                    child2.setAddToLeafNode(false);
+                    child2.setAddToLeafNodeList(false);
 
                 }else{
                     child1.setParent(this);
@@ -89,7 +96,7 @@ public class Node {
                     Node child2=new Node(child.data+nextNumber);
                     child2.setParent(this);
                     this.children.add(child2);
-                    child2.setAddToLeafNode(false);
+                    child2.setAddToLeafNodeList(false);
 
                 }else{
                     child1.setParent(this);
@@ -103,10 +110,7 @@ public class Node {
         return child;
     }
 
-    public void addChildren(List<Node> children) {
-        children.forEach(each -> each.setParent(this));
-        this.children.addAll(children);
-    }
+
 
     public List<Node> getChildren() {
         return children;
@@ -116,9 +120,7 @@ public class Node {
         return data;
     }
 
-    public void setData(Integer data) {
-        this.data = data;
-    }
+
 
     private void setParent(Node parent) {
         this.parent = parent;
@@ -128,12 +130,12 @@ public class Node {
         return parent;
     }
 
-    public boolean isAddToLeafNode() {
-        return addToLeafNode;
+    public boolean isAddToLeafNodeList() {
+        return addToLeafNodeList;
     }
 
-    public void setAddToLeafNode(boolean addToLeafNode) {
-        this.addToLeafNode = addToLeafNode;
+    public void setAddToLeafNodeList(boolean addToLeafNode) {
+        this.addToLeafNodeList = addToLeafNode;
     }
 
     public Set<Node> getAllLeafNodes() {
@@ -150,75 +152,75 @@ public class Node {
 
 
 
-    public static void printAllRootToLeafPaths(Node node, ArrayList<Integer> path, Boolean withoutRoot, Boolean forInternational)
-    {
-
-
-        if(node==null)
-        {
-
-            return;
-        }
-        path.add(node.getData());
-
-
-
-        if(node.getChildren().isEmpty())
-
-        {
-            System.out.print("Interpretationn :");
-
-            if (forInternational) {
-
-                System.out.print("0030");
-            }
-
-            if (withoutRoot){
-                for(int i=1; i<=path.size()-1; i++){
-                    System.out.print(path.get(i));
-
-                }
-
-
-            }else {
-                for (Integer digit : path
-                ) {
-                    System.out.print(digit);
-                }
-
-
-            }
-            int lengthOfInterpetation=0;
-            for (Integer digit:path
-                 ) {
-                lengthOfInterpetation += String.valueOf(digit).length();
-
-            }
-            if (lengthOfInterpetation==10){
-            System.out.print(" Valid");
-        }else{
-                System.out.print(" Invalid");
-            }
-            System.out.println();
-
-
-        }
-        else
-        {
-
-            for (Node child:node.getChildren()
-                 ) {
-
-                printAllRootToLeafPaths(child,new ArrayList(path),withoutRoot,forInternational);
-            }
-
-
-        }
-
-
-
-
-    }
+//    public static void printAllRootToLeafPaths(Node node, ArrayList<Integer> path, Boolean withoutRoot, Boolean forInternational)
+//    {
+//
+//
+//        if(node==null)
+//        {
+//
+//            return;
+//        }
+//        path.add(node.getData());
+//
+//
+//
+//        if(node.getChildren().isEmpty())
+//
+//        {
+//            System.out.print("Interpretationn :");
+//
+//            if (forInternational) {
+//
+//                System.out.print("0030");
+//            }
+//
+//            if (withoutRoot){
+//                for(int i=1; i<=path.size()-1; i++){
+//                    System.out.print(path.get(i));
+//
+//                }
+//
+//
+//            }else {
+//                for (Integer digit : path
+//                ) {
+//                    System.out.print(digit);
+//                }
+//
+//
+//            }
+//            int lengthOfInterpetation=0;
+//            for (Integer digit:path
+//                 ) {
+//                lengthOfInterpetation += String.valueOf(digit).length();
+//
+//            }
+//            if (lengthOfInterpetation==10){
+//            System.out.print(" Valid");
+//        }else{
+//                System.out.print(" Invalid");
+//            }
+//            System.out.println();
+//
+//
+//        }
+//        else
+//        {
+//
+//            for (Node child:node.getChildren()
+//                 ) {
+//
+//                printAllRootToLeafPaths(child,new ArrayList(path),withoutRoot,forInternational);
+//            }
+//
+//
+//        }
+//
+//
+//
+//
+//    }
 
 
 }
